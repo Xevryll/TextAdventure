@@ -11,57 +11,30 @@ public class MTTest{
 		long start = System.currentTimeMillis();
 		try {
 			System.out.println("Generating " + (Integer.valueOf(args[0]))*16 + " rooms.");
-			System.out.println("3");
-			Thread.sleep(1000);
-			System.out.println("2");
-			Thread.sleep(1000);
-			System.out.println("1");
-			Thread.sleep(1000);
-			System.out.println("0");
+			for (i = 3; i>= 0; i--) {
+				System.out.println(i);
+				Thread.sleep(1000);
+			}
+			
 		} catch (Exception e) {}
+		
 		for(int i = 1; i<=Integer.valueOf(args[0]); i++) {
+			
 			Thread t = new Thread(new Runnable() {
+				
+				@Override //<- my compiler will bitch about this
 				public void run() {
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
-					try {
-						Thread.sleep(1);
-					} catch (Exception e){}
-					running();
+					for (int i = 0; i < 10; i++) {
+						running();
+						try {
+							Thread.sleep(1);
+						} catch (Exception e) {}
+					}
 				}
 			});
+			
 			t.start();
+			
 			try {
 				t.join();
 			} catch (Exception e) {}
