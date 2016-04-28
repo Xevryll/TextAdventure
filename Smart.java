@@ -31,93 +31,115 @@ public class Smart {
 			System.out.println();
 		}
 		boolean game = true;
-		while (game == true) {
+		while (game) {
 			Scanner scanner = new Scanner(System.in);
 			String userInput = scanner.nextLine();
-			if (userInput.equalsIgnoreCase("walk forward") || userInput.equalsIgnoreCase("move forward") || userInput.equalsIgnoreCase("go forward") || userInput.equalsIgnoreCase("forward")) {
-				if (x != 1) {
-					x--;
-					cls();
-					System.out.println(rm.getRoomAt(x, y).getInfo());
-				} else {
-					cls();
-					System.out.println("You can't walk forwards." );
+			
+			switch (userInput.toLowerCase())
+			{
+				case "walk forward": case "move forward": case "go forward": case "forward": {
+					if (x != 1) {
+						x--;
+						cls();
+						System.out.println(rm.getRoomAt(x, y).getInfo());
+					} else {
+						cls();
+						System.out.println("You can't walk forwards." );
+						try {
+							Thread.sleep(2000);
+						} catch(InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
+						genCoordinates();
+					}
+					break;
+				}
+					
+				case "walk backwards": case "move backwards": case "go backwards": case "backwards": {
+					if (x != 4) {
+						x++;
+						cls();
+						System.out.println(rm.getRoomAt(x, y).getInfo());
+					} else{
+						cls();
+						System.out.println("You can't walk backward.");
+						try {
+							Thread.sleep(2000);
+						} catch(InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
+						System.out.println(rm.getRoomAt(x, y).getInfo());
+					}
+					break;
+				}
+					
+				case "walk left": case "move left": case "go left": case "left": {
+					if (y != 1) {
+						y--;
+						cls();
+						System.out.println(rm.getRoomAt(x, y).getInfo());
+					} else {
+						cls();
+						System.out.println("You can't walk to your left.");
+						try {
+							Thread.sleep(2000);
+						} catch(InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
+						System.out.println(rm.getRoomAt(x, y).getInfo());
+					}
+					break;
+				}
+					
+				case "walk right": case "move right": case "go right": case "right": {
+					if (y != 4) {
+						y++;
+						cls();
+						System.out.println(rm.getRoomAt(x, y).getInfo());
+					} else { 
+						cls();
+						System.out.println("You can't walk to your right.");
+						try {
+							Thread.sleep(2000);
+						} catch(InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
+						genCoordinates();
+					}
+					break;
+				}
+				
+				case "dance": {
+					System.out.println("Dubstep music plays faintly in the background.");
+					System.out.println("You can't help but dance... Wait... I CAN'T STOP!");
+					System.out.println("You die of dehydration due to dancing too much.");
+					System.out.println("Your skeleton still dances to this day...");
+					game = false;
+					break;
+				}
+					
+				case "help": {
+					System.out.println("Commands: Walk/Go/Move right/left/backwards/forward");
+					System.out.println("Example: walk backwards OR go forward");
 					try {
-						Thread.sleep(2000);
+						Thread.sleep(8000);
+					} catch(InterruptedException ex) {
+						Thread.currentThread().interrupt();
+					}
+					genCoordinates();
+					break;
+				}
+					
+				default:  {
+					System.out.println("Error 404: Unknown Command");
+					System.out.println("Type 'help' for a list of commands.");
+					try {
+						Thread.sleep(8000);
 					} catch(InterruptedException ex) {
 						Thread.currentThread().interrupt();
 					}
 					genCoordinates();
 				}
-			} else if (userInput.equalsIgnoreCase("walk backwards") || userInput.equalsIgnoreCase("move backwards") || userInput.equalsIgnoreCase("go backwards") || userInput.equalsIgnoreCase("backwards")) {
-				if (x != 4) {
-					x++;
-					cls();
-					System.out.println(rm.getRoomAt(x, y).getInfo());
-				} else{
-					cls();
-					System.out.println("You can't walk backward.");
-					try {
-						Thread.sleep(2000);
-					} catch(InterruptedException ex) {
-						Thread.currentThread().interrupt();
-					}
-					System.out.println(rm.getRoomAt(x, y).getInfo());
-				}
-			} else if (userInput.equalsIgnoreCase("walk left") || userInput.equalsIgnoreCase("move left") || userInput.equalsIgnoreCase("go left") || userInput.equalsIgnoreCase("left")) {
-				if (y != 1) {
-					y--;
-					cls();
-					System.out.println(rm.getRoomAt(x, y).getInfo());
-				} else {
-					cls();
-					System.out.println("You can't walk to your left.");
-					try {
-						Thread.sleep(2000);
-					} catch(InterruptedException ex) {
-						Thread.currentThread().interrupt();
-					}
-					System.out.println(rm.getRoomAt(x, y).getInfo());
-				}
-			} else if (userInput.equalsIgnoreCase("walk right") || userInput.equalsIgnoreCase("move right") || userInput.equalsIgnoreCase("go right") || userInput.equalsIgnoreCase("right")) {
-				if (y != 4) {
-					y++;
-					cls();
-					System.out.println(rm.getRoomAt(x, y).getInfo());
-				} else { 
-					cls();
-					System.out.println("You can't walk to your right.");
-					try {
-						Thread.sleep(2000);
-					} catch(InterruptedException ex) {
-						Thread.currentThread().interrupt();
-					}
-					genCoordinates();
-				}
-			} else if (userInput.equalsIgnoreCase("dance")){
-				System.out.println("Dubstep music plays faintly in the background.");
-				System.out.println("You can't help but dance... Wait... I CAN'T STOP!");
-				System.out.println("You die of dehydration due to dancing too much.");
-				System.out.println("Your skeleton still dances to this day...");
-				game = false;
-			}else if (userInput.equalsIgnoreCase("help")){
-				System.out.println("Commands: Walk/Go/Move right/left/backwards/forward");
-				System.out.println("Example: walk backwards OR go forward");
-				try {
-					Thread.sleep(8000);
-				} catch(InterruptedException ex) {
-					Thread.currentThread().interrupt();
-				}
-				genCoordinates();
-			} else {
-				System.out.println("Error 404: Unknown Command");
-				System.out.println("Type 'help' for a list of commands.");
-				try {
-					Thread.sleep(8000);
-				} catch(InterruptedException ex) {
-					Thread.currentThread().interrupt();
-				}
-				genCoordinates();
 			}
 		}
 		System.exit(0);
@@ -138,7 +160,7 @@ public class Smart {
 	}
 	
 	private static void credits() {
-		System.out.println("This game was made by Maeyrl for a two month long project. ");
+		System.out.println("This game was made by Maeyrl for a two month long project. "); // AND THE HELP OF A FRIEND
 		System.out.println("Your game will restart in 15 seconds.");		
 		try {
 			Thread.sleep(15000);
