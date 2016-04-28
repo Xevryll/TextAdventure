@@ -1,4 +1,4 @@
-public abstract interface Entity {
+public interface Entity {
 	int getHealth();
 	void damageEntity(int a);
 	int attackEnemy(int a);
